@@ -14,6 +14,7 @@ roteador.post("/", async (requisicao, resposta) => {
   const dadosRecebidos = requisicao.body
   const fornecedor = new Fornecedor(dadosRecebidos)
   await fornecedor.criar()
+  console.log(dadosRecebidos)
   resposta.send(
     JSON.stringify(fornecedor)
   )
