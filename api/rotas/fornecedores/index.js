@@ -4,7 +4,7 @@ const Fornecedor = require('./Fornecedor')
 const { get } = require("express/lib/request")
 const SerializadorFornecedor = require('../../Serializador').SerializadorFornecedor
 
-roteador.get("/", async (requisicao, resposta) => {
+roteador.get('/', async (requisicao, resposta) => {
   const resultados = await TabelaFornecedor.listar()
   resposta.status(200)
   const serializador = new SerializadorFornecedor(
@@ -16,7 +16,7 @@ roteador.get("/", async (requisicao, resposta) => {
 
 })
 
-roteador.post("/", async (requisicao, resposta, proximo) => {
+roteador.post('/', async (requisicao, resposta, proximo) => {
   try {
      const dadosRecebidos = requisicao.body
      const fornecedor = new Fornecedor(dadosRecebidos)
@@ -27,7 +27,7 @@ roteador.post("/", async (requisicao, resposta, proximo) => {
     )
      resposta.send(
          serializador.serializar(fornecedor)
-      )
+    )
    } catch (erro) {
      proximo(erro)
    }
