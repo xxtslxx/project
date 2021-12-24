@@ -40,7 +40,8 @@ roteador.get('/:idFornecedor', async (requisicao, resposta, proximo) => {
        await fornecedor.carregar()
        resposta.status(200)
        const serializador = new SerializadorFornecedor(
-         resposta.getHeader('Content-Type')
+         resposta.getHeader('Content-Type'),
+         ['email', 'dataCriacao', 'dataAtualizacao', 'versao']
        )
        resposta.send(
           serializador.serializar(fornecedor)
@@ -77,6 +78,9 @@ roteador.delete('/:idFornecedor', async (requisicao, resposta, proximo) => {
       proximo(erro) 
     }
 })
+
+const roteadorProdutos = require('./produtos')
+roteador.use('/:idFornecedor/produtos', roteadorProdutos)
   
 module.exports = roteador
  
