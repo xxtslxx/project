@@ -95,7 +95,7 @@ roteador.delete('/:idActivity', async (requisicao, resposta, proximo) => {
     }
 })
 
-const roteadorTasks = require('./tasks')
+const roteadorTasks = require('./task')
 
 const verificarActivity = async (requisicao, resposta, proximo) => {
   try {

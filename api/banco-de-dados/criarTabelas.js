@@ -1,6 +1,6 @@
 const modelos = [
     require('../rotas/activity/ModeloTabelaActivity'),
-    require('../rotas/activity/tasks/ModeloTabelaTask')
+    require('../rotas/activity/task/ModeloTabelaTask')
 ]
 
 async function criarTabelas () {
