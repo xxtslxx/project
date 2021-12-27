@@ -19,7 +19,7 @@ const colunas = {
         type: Sequelize.INTEGER,
         allowNull:false,
         references: {
-            model: require('../ModeloTabelaFornecedor'),
+            model: require('../ModeloTabelaActivity'),
             key: 'id'
         }
     }
@@ -34,4 +34,4 @@ const opcoes = {
     version: 'versao' 
 }
 
-module.exports = instancia.define('produto', colunas, opcoes )
+module.exports = instancia.define('tasks', colunas, opcoes )

@@ -1,6 +1,6 @@
 const roteador = require("express").Router()
-const TabelaFornecedor = require('./TabelaFornecedor')
-const SerializadorFornecedor = require('../../Serializador').SerializadorFornecedor
+const TabelaActivity = require('./TabelaActivity')
+const SerializadorActivity = require('../../Serializador').SerializadorActivity
 
 
 roteador.options('/', (requisicao, resposta) => {
@@ -11,9 +11,9 @@ roteador.options('/', (requisicao, resposta) => {
 })
 
 roteador.get('/', async (requisicao, resposta) => {
-    const resultados = await TabelaFornecedor.listar()
+    const resultados = await TabelaActivity.listar()
     resposta.status(200)
-    const serializador = new SerializadorFornecedor(
+    const serializador = new SerializadorActivity(
       resposta.getHeader('Content-Type')
     )
     resposta.send(

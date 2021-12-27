@@ -1,8 +1,8 @@
-const TabelaFornecedor = require('./TabelaFornecedor')
+const TabelaActivity = require('./TabelaActivity')
 const CampoInvalido = require('../../erros/CampoInvalido')
 const DadosNaoFornecidos = require('../../erros/DadosNaoFornecidos')
 
-class Fornecedor {
+class Activity {
   constructor ({ id, empresa, email, categoria, dataCriacao, dataAtualizacao, versao }) {
     this.id = id
     this.empresa = empresa
@@ -15,7 +15,7 @@ class Fornecedor {
 
   async criar () {
       this.validar()
-      const resultado = await TabelaFornecedor.inserir({
+      const resultado = await TabelaActivity.inserir({
         empresa: this.empresa,
         email: this.email,
         categoria: this.categoria
@@ -28,7 +28,7 @@ class Fornecedor {
   }
 
   async carregar () {
-    const encontrado = await TabelaFornecedor.pegarPorId(this.id)
+    const encontrado = await TabelaActivity.pegarPorId(this.id)
     this.empresa = encontrado.empresa
     this.email = encontrado.email
     this.categoria = encontrado.categoria
@@ -38,7 +38,7 @@ class Fornecedor {
   }
 
   async atualizar () {
-    await TabelaFornecedor.pegarPorId(this.id)
+    await TabelaActivity.pegarPorId(this.id)
     const campos = ['empresa', 'email', 'categoria']
     const dadosParaAtualizar = {}
 
@@ -54,11 +54,11 @@ class Fornecedor {
       throw new DadosNaoFornecidos()
     }
 
-    await TabelaFornecedor.atualizar(this.id, dadosParaAtualizar)
+    await TabelaActivity.atualizar(this.id, dadosParaAtualizar)
   }
 
   remover () {
-    return TabelaFornecedor.remover(this.id)
+    return TabelaActivity.remover(this.id)
   }
 
   validar () {
@@ -74,4 +74,4 @@ class Fornecedor {
   }
 }
 
-module.exports = Fornecedor
+module.exports = Activity

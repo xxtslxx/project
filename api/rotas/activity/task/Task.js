@@ -1,8 +1,8 @@
-const Tabela = require('./TabelaProduto')
+const Tabela = require('./TabelaTask')
 const DadosNaoFornecidos = require('../../../erros/DadosNaoFornecidos')
 const CampoInvalido = require('../../../erros/CampoInvalido')
 
-class Produto {
+class Task {
     constructor ({ id, titulo, preco, estoque, fornecedor, dataCriacao, dataAtualizacao, versao } = {}) {
         this.id = id
         this.titulo = titulo
@@ -42,17 +42,17 @@ class Produto {
     }
 
     apagar () {
-        return Tabela.remover(this.id, this.fornecedor)
+        return Tabela.remover(this.id, this.activity)
     }
 
     async carregar () {
-        const produto = await Tabela.pegarPorId(this.id, this.fornecedor)
-        this.titulo = produto.titulo
-        this.preco = produto.preco
-        this.estoque = produto.estoque
-        this.dataCriacao = produto.dataCriacao
-        this.dataAtualizacao = produto.dataAtualizacao
-        this.versao = produto.versao
+        const task = await Tabela.pegarPorId(this.id, this.activity)
+        this.titulo = task.titulo
+        this.preco = task.preco
+        this.estoque = task.estoque
+        this.dataCriacao = task.dataCriacao
+        this.dataAtualizacao = task.dataAtualizacao
+        this.versao = task.versao
     }
 
     atualizar () {
@@ -77,7 +77,7 @@ class Produto {
         return Tabela.atualizar(
             {
                 id: this.id,
-                fornecedor: this.fornecedor
+                activity: this.activity
             },
             dadosParaAtualizar
         )
@@ -86,11 +86,11 @@ class Produto {
     diminuirEstoque () {
         return Tabela.subtrair (
             this.id,
-            this.fornecedor,
+            this.activity,
             'estoque', 
             this.estoque 
         )
     }
 }
 
-module.exports = Produto
+module.exports = Task

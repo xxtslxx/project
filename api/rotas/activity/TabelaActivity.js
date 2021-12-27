@@ -1,12 +1,12 @@
-const Modelo = require('./ModeloTabelaFornecedor')
+const Modelo = require('./ModeloTabelaActivity')
 const NaoEncontrado = require('../../erros/NaoEncontrado')
 
 module.exports = {
   listar () {
     return Modelo.findAll({ raw: true })
   },
-  inserir(fornecedor) {
-    return Modelo.create(fornecedor)
+  inserir(activity) {
+    return Modelo.create(activity)
   },
   async pegarPorId (id) {
     const encontrado = await Modelo.findOne({
@@ -16,7 +16,7 @@ module.exports = {
   })
 
   if (!encontrado) {
-    throw new NaoEncontrado('Fornecedor')
+    throw new NaoEncontrado('Activity')
   }
 
   return encontrado

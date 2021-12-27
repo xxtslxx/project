@@ -1,12 +1,12 @@
-const Modelo = require('./ModeloTabelaProduto')
+const Modelo = require('./ModeloTabelaTask')
 const instancia = require('../../../banco-de-dados')
 const NaoEncontrado = require('../../../erros/NaoEncontrado')
 
 module.exports = {
-    listar (idFornecedor) {
+    listar (idActivity) {
         return Modelo.findAll({
             where: {
-                fornecedor: idFornecedor
+                activity: idActivity
             },
             raw: true
         })
@@ -14,51 +14,51 @@ module.exports = {
     inserir (dados) {
         return Modelo.create(dados)
     },
-    remover (idProduto, idFornecedor) {
+    remover (idTask, idActivity) {
         return Modelo.destroy({
             where: {
-                id: idProduto,
-                fornecedor: idFornecedor
+                id: idTask,
+                activity: idActivity
             }
         })
     },
-    async pegarPorId (idProduto, idFornecedor) {
+    async pegarPorId (idTask, idActivity) {
         const encontrado = await Modelo.findOne({
             where: {
-                id: idProduto,
-                fornecedor: idFornecedor
+                id: idTask,
+                activity: idActivity
             },
             raw: true
         })
 
         if(!encontrado) {
-            throw new NaoEncontrado('Produto')
+            throw new NaoEncontrado('Task')
         }
 
         return encontrado 
     },
-    atualizar (dadosDoProduto, dadosParaAtualizar) {
+    atualizar (dadosDoTask, dadosParaAtualizar) {
         return Modelo.update(
             dadosParaAtualizar,
             {
-                where: dadosDoProduto
+                where: dadosDoTask
             }
         )
     },
-    subtrair (idProduto, idFornecedor, campo, quantidade) {
+    subtrair (idTask, idActivity, campo, quantidade) {
         return instancia.transaction(async transacao => {
-            const produto = await Modelo.findOne({
+            const task = await Modelo.findOne({
                 where: {
-                    id: idProduto,
-                    fornecedor: idFornecedor
+                    id: idTask,
+                    activity: idActivity
                 }
             })
 
-            produto[campo] = quantidade
+            task[campo] = quantidade
 
-            await produto.save()
+            await task.save()
 
-            return produto 
+            return task
         })
     }
 }

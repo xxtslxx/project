@@ -1,6 +1,6 @@
 {
     "mysql": {
-        "banco-de-dados":"petshop",
+        "banco-de-dados":"project",
         "usuario":"root",
         "senha":"12345",
         "host":"127.0.0.1"
