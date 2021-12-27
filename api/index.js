@@ -67,6 +67,6 @@ app.use((erro, requisicao, resposta, proximo) => {
       )
 })
  
-app.listen(config.get('api.porta'), () => console.log('A API esta funcionando!'))
+app.listen(config.get('api.porta'), () => console.log('A API esta ONLINE!'))
 
 //tassiolima
