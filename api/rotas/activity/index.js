@@ -75,7 +75,7 @@ roteador.put('/:idActivity', async (requisicao, resposta, proximo) => {
       const dados = Object.assign({}, dadosRecebidos,{ id: id})
       const activity = new Activity(dados)
       await activity.atualizar()
-      resposta.status(204)
+      resposta.status(200)
       resposta.end()
     } catch (erro) {
         proximo(erro)
